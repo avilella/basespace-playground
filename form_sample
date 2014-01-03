@@ -1,0 +1,57 @@
+{
+    "$type": "Form",
+    "fields": [
+        {
+            "$type": "SampleChooser",
+            "size": 300,
+            "allowedPermissions": "read",
+            "label": "Sample",
+            "required": true,
+            "requiredMessage": "Please choose a sample",
+            "id": "sample-id",
+            "rules": "is-paired-end,min-cycles-1,min-cycles-2,is-sample-reader,sample-is-not-empty"
+        },
+        {
+            "$type": "ProjectChooser",
+            "size": 500,
+            "valueType": "Output",
+            "allowedPermissions": "owner",
+            "label": "Save Results To",
+            "required": true,
+            "requiredMessage": "Please choose a project",
+            "id": "project-id",
+            "allowResourceCreation": true,
+            "rules": "is-project-owner"
+        },
+        {
+            "$type": "TextBox",
+            "label": "Analysis Name",
+            "size": 400,
+            "minLength": 0,
+            "maxLength": 150,
+            "value": "Example [LocalDateTime]",
+            "required": true,
+            "requiredMessage": "Please enter name for your app session.",
+            "id": "app-session-name"
+        },
+        {
+            "$type": "SectionBreak"
+        }
+    ],
+    "rulesets":[
+        {
+            "$type": "PermissionValidationRule",
+            "permissions": "Read",
+            "severity": "Error",
+            "message": "You do not have read access to the selected sample",
+            "id": "sample-reader"
+        },
+        {
+            "$type": "PermissionValidationRule",
+            "permissions": "Own",
+            "severity": "Error",
+            "message": "You aren't the owner of the selected project.",
+            "id": "is-project-owner"
+        }
+    ]
+}
